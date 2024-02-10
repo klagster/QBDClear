@@ -35,21 +35,21 @@ def delete_all_qbd_bills_and_credits():
     BATCH = int(storage.get_text_asset("QBDBatchSize"))
                     
     install_license()
-    #quickbooks_connection_string= f"User={UNAME};Password={PWORD};URL={HOST}"
-    quickbooks_connection_string= f"User={UNAME};Password=Smeghead1!;URL={HOST}"
+
+    quickbooks_connection_string= f"User={UNAME};Password={PWORD};URL={HOST}"
     connn = mod.connect(quickbooks_connection_string)
     cur = connn.cursor()
 
     all_bills = connn.execute("SELECT ID FROM Bills;").fetchall()
     for i in range(0, len(all_bills), BATCH):
-        sub_list = all_bills[i:i+BATCH]  # Create a sublist of 5 rows or the remaining rows
+        sub_list = all_bills[i:i+BATCH]  # Create a sublist of BATCH rows or the remaining rows
         param_values = [(item[0],) for item in sub_list]
         delete_command = "DELETE FROM Bills WHERE ID = ?"
         cur.executemany(delete_command,param_values)
 
     all_credits = connn.execute("SELECT ID FROM VendorCredits;").fetchall()
     for i in range(0, len(all_credits), BATCH):
-        sub_list = all_credits[i:i+BATCH]  # Create a sublist of 5 rows or the remaining rows
+        sub_list = all_credits[i:i+BATCH]  # Create a sublist of BATCH rows or the remaining rows
         param_values = [(item[0],) for item in sub_list]
         delete_command = "DELETE FROM VendorCredits WHERE ID = ?"
         cur.executemany(delete_command,param_values)
