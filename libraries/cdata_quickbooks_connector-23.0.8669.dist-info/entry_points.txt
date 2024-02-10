@@ -1,0 +1,5 @@
+[sqlalchemy.dialects]
+cdata_quickbooks = cdata.sqlalchemy_quickbooks.dialect:QuickBooksDBSDialect
+cdata_quickbooks_2 = cdata.sqlalchemy2_quickbooks.dialect:QuickBooksDBSDialect
+quickbooks = cdata.sqlalchemy_quickbooks.dialect:QuickBooksDBSDialect
+quickbooks_2 = cdata.sqlalchemy2_quickbooks.dialect:QuickBooksDBSDialect
